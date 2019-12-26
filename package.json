@@ -1,0 +1,19 @@
+{
+  "name": "todo-app",
+  "version": "0.0.0",
+  "description": "Webcomponent todo-app following open-wc recommendations",
+  "author": "todo-app",
+  "license": "MIT",
+  "scripts": {
+    "start": "es-dev-server --app-index index.html --node-resolve --open --watch",
+    "storybook": "start-storybook --stories \"components/*/stories/*.stories.{js,mdx}\" --node-resolve --watch --open",
+    "storybook:build": "build-storybook --stories \"components/*/stories/*.stories.{js,mdx}\""
+  },
+  "dependencies": {
+    "lit-html": "^1.0.0",
+    "lit-element": "^2.0.1"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.5.0"
+  }
+}
