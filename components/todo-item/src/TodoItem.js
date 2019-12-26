@@ -38,19 +38,24 @@ export class TodoItem extends LitElement {
       cursor: pointer;
       border: none;
     }
+    #close{
+      color:red;
+      border: 0.1px solid grey;
+         }
+
+         
     `;
   }
   render() {
     return html`
-    <li class= "item">
-      <input
+    
+      <input 
         type="checkbox"
         ?checked= ${this.checked}
         @change=${() => this._fire('onToggle')}/>
       <label class=${this.checked ? 'completed' : ''}>${this.text}</label>
-      <button @click = ${() => this._fire('onRemove')}>X </button>
-    </li>
-`;
+      <button id='close' @click = ${() => this._fire('onRemove')}>X </button>
+ `;
   }
 
   _fire(event) {

@@ -1,6 +1,8 @@
 import { html, LitElement, css } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import '../../todo-item/todo-item.js';
+import '@lion/input/lion-input.js';
+import '@lion/button/lion-button.js';
 
 export class TodoMain extends LitElement {
 
@@ -11,21 +13,30 @@ export class TodoMain extends LitElement {
   }
 
   static get styles() {
-    return css` 
-       :host {
-           display: block;
-           font-family: sans-serif;
-           text-align: center;
-       }
-       button {
-           border: none;
-           cursor: pointer;
-       }
-       ul {
-           list-style: none;
-           padding: 0;
-       }
-        `;
+    return css`     
+
+    h1 {
+       font-family: sans-serif;
+      text-align: center;
+  }
+
+form{
+  width: 208px;
+  margin: 0 auto;
+  text-align: center;
+
+} 
+
+.split2{
+  display: flex;
+  justify-content: center;
+}
+.todos{
+  padding: 0;
+ list-style: none;
+ margin: 0;
+} 
+ `;
   }
 
   static get properties() {
@@ -37,14 +48,11 @@ export class TodoMain extends LitElement {
     this.inputData = this.shadowRoot.querySelector('input');
 
   }
-   
-
   _removeItem(e) {
     this.todos = this.todos.filter((todo, index) => {
       return index !== e.detail;
     })
   }
-
 
   _toggleItem(e) {
     this.todos = this.todos.map((todo, index) => {
@@ -52,7 +60,6 @@ export class TodoMain extends LitElement {
     });
 
   }
-
 
   _addItem(e) {
     e.preventDefault();
@@ -66,13 +73,20 @@ export class TodoMain extends LitElement {
     return html`
     
     <h1>TODO APP</h1>
-    <form id="todo-input">
-      <input type="text" placeholder="Add item"/>
-      <button @click=${this._addItem}>Add</button>  
-    </form>
-    <ul id="todos">
+    <div class="split1">
+      <form @submit=${ev => ev.preventDefault()}>
+        <div class="test"><lion-input class="input"
+        placeholder="Add item"></lion-input>
+        </div>       
+        <lion-button  @click=${this._addItem}>Add</lion-button>
+      </form>  
+    </div>
+
+    <div class="split2">    
+
+    <ul class="todos">
       ${repeat(this.todos,
-      (todo, index) => html`
+      (todo, index) => html` <li class= "item">
           <todo-item 
           .checked=${todo.checked}
           .index=${index}
@@ -80,13 +94,13 @@ export class TodoMain extends LitElement {
           @onRemove=${this._removeItem}
           @onToggle=${this._toggleItem}
           >
-          </todo-item>
+          </todo-item></li>
           `
     )}
     </ul>
+     </div>
     `;
   }
 
 }
 
- 
