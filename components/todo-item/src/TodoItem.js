@@ -41,8 +41,10 @@ export class TodoItem extends LitElement {
     #close{
       color:red;
       border: 0.1px solid grey;
-         }
+      float: right;
 
+         }
+ 
          
     `;
   }
